@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/css/Layout/layout.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="navbar">
+        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+        <ul>
+            <li><a class="active" href="#">Dashboard</a></li>
+            <li><a href="#">Contact</a></li>
+            <li style="float:right"><a href="/Login/Index">Sign Out</a></li>
+        </ul>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+    string isValidUser = Url.Action("isValidUser", "Login");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/css/Login/login.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+        <ul>
+            <li style="float:right; margin-right: 70px"><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <div class="userInputBorder">
+        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+        @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post, new { id = "loginForm" }))
+        { 
+            <input type="text" id="userId" placeholder="Username"><br />
+            <input type="text" id="password" placeholder="Password" onclick="enterPassword()"><br />
+            <button type="button" id="loginBtn">LOGIN</button>
+        }
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#loginBtn').click(function () {
+                submitForm();
+            });
+
+            $('#password').keypress(function (e) {
+                var keycode = e.keyCode
+                if (keycode == 13) {
+                    submitForm();
+                }
+            });
+        });
+
+        function enterPassword() {
+            var passwordInput = document.getElementById("password");
+            passwordInput.type = "password"
+        }
+
+        function submitForm() {
+            var userId = $('#userId').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                method: 'GET',
+                url: '@isValidUser',
+                data: { userId: userId, password: password },
+                cache: false,
+                success: function (data) {
+                    var result = data.result;
+                    if (result) {
+                        $('#loginForm').submit();
+                    }
+                    else {
+                        alert('Invalid ID or password');
+                        return false;
+                    }
+                }
+
+            });
+        }
+    </script>
+</body>
+</html>

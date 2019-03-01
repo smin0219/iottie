@@ -1,0 +1,36 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin-top: 60px;
+    margin-left: 5%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#newBtn {
+    width: 170px;
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 5%;
+    background-color: #8DC63F;
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    float: right;
+}
