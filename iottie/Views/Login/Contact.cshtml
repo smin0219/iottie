@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/css/Login/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Layout/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+        <ul>
+            <li><a href="/Login/Index">Home</a></li>
+            <li><a href="/Login/Contact">Contact</a></li>
+        </ul>
+    </div>
+    <h2>"Contact".</h2>
+    <address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>
+    <script>
+        $(function () {
+            $('a').each(function () {
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

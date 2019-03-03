@@ -1,5 +1,7 @@
-﻿@{
+﻿@model iottie.Models.DashboardModel
+@{
     Layout = "/Views/Shared/_Layout.cshtml";
+    int count = 1;
 }
 
 <!DOCTYPE html>
@@ -25,8 +27,30 @@
                 <th>ASSIGNEE</th>
                 <th>DEADLINE</th>
                 <th>PRIORITY</th>
+                <th>DETAIL</th>
             </tr>
+
+        @foreach (var row in Model.dashboardList)
+        {
+            <tr>
+                <td>@count</td>
+                <td>@row.title</td>
+                <td>@row.status</td>
+                <td>@row.createdBy</td>
+                <td>@row.assignee</td>
+                <td>@row.deadline</td>
+                <td>@row.priority</td>
+                <td>
+                    <button type="button" id="detailBtn" onclick="isDetailBtnClicked()">SEE DETAIL</button>
+                    <input type="hidden" name="idnum" value=@row.idnum>
+                </td>
+
+            </tr>
+
+            count++;
+        }
         </table>
+
     }
     <script>
         $(document).ready(function () {
@@ -34,6 +58,10 @@
                 $('#addNewProjectForm').submit();
             });
         });
+
+        function isDetailBtnClicked() {
+            $('#addNewProjectForm').submit();
+        }
     </script>
 </body>
 </html>

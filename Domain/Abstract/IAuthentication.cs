@@ -8,6 +8,8 @@ namespace Domain.Abstract
 {
     public interface IAuthentication
     {
-        bool isValidUser(string userId, string password);
+        void createUser(string firstName, string lastName, string username, string password, int isDev);
+        bool isValidUser(string username, string password);
+        bool isValidUser(string username);
     }
 }

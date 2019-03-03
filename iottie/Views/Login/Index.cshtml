@@ -1,6 +1,9 @@
 ﻿@{
     Layout = null;
     string isValidUser = Url.Action("isValidUser", "Login");
+    string isValidUsername = Url.Action("isValidUsername", "Login");
+    string signUp = Url.Action("SignUp", "Login");
+
 }
 
 <!DOCTYPE html>
@@ -10,52 +13,103 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     <link href="~/css/Login/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Layout/layout.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="navbar">
         <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
         <ul>
-            <li style="float:right; margin-right: 70px"><a href="#">Contact</a></li>
+            <li><a href="/Login/Index">Home</a></li>
+            <li><a href="/Login/Contact">Contact</a></li>
         </ul>
     </div>
     <div class="userInputBorder">
-        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
         @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post, new { id = "loginForm" }))
-        { 
-            <input type="text" id="userId" placeholder="Username"><br />
-            <input type="text" id="password" placeholder="Password" onclick="enterPassword()"><br />
-            <button type="button" id="loginBtn">LOGIN</button>
+        {
+            <div id="loginView">
+                <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+
+                <input type="text" class="inputBox" id="username" placeholder="Enter your username"><br />
+                <input type="text" class="inputBox" id="password" placeholder="Enter you password" onclick="setPassword()"><br />
+                <button type="button" class="loginBtn" id="loginBtn">LOGIN</button><br />
+                <button type="button" class="loginBtn" id="signUpBtn"> SIGN UP </button>
+            </div>
+        }
+        @using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { id = "signUpForm" }))
+        {
+            <div id="signUpView" hidden>
+                <h1>Create New Account</h1><br />
+                <input type="text" class="inputBox" id="signUp_firstName" placeholder="Enter your first name"><br />
+                <input type="text" class="inputBox" id="signUp_lastName" placeholder="Enter your last name"><br />
+                <input type="text" class="inputBox" id="signUp_username" placeholder="Enter your username"><br />
+                <input type="text" class="inputBox" id="signUp_password" placeholder="Enter your password" onclick="setPassword()"><br />
+                <input type="text" class="inputBox" id="signUp_checkPassword" placeholder="Re-enter your password" onclick="setPassword()"><br />
+                <div class="radio-item">
+                    <input type="radio" name="radio-item" value='1'> Developer <br />
+                    <input type="radio" name="radio-item" value='0' checked> Non-Developer<br />
+                </div>
+                <button type="button" class="loginBtn" id="submitBtn">SUBMIT</button><br />
+                <button type="button" class="loginBtn" id="backBtn">BACK</button><br />
+            </div>
         }
     </div>
-
     <script>
+
+        $(function () {
+            $('a').each(function () {
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+
         $(document).ready(function () {
             $('#loginBtn').click(function () {
-                submitForm();
+                submitLoginForm();
+            });
+
+            $('#signUpBtn').click(function () {
+                $('#loginView').hide();
+                $('#signUpView').show();
+            });
+
+            $('#submitBtn').click(function () {
+                submitSignUpForm();
+            });
+
+            $('#backBtn').click(function () {
+                $('#signUpView').hide();
+                $('#loginView').show();
+
             });
 
             $('#password').keypress(function (e) {
                 var keycode = e.keyCode
                 if (keycode == 13) {
-                    submitForm();
+                    submitLoginForm();
                 }
             });
+
         });
 
-        function enterPassword() {
-            var passwordInput = document.getElementById("password");
-            passwordInput.type = "password"
+        function setPassword() {
+            var password = document.getElementById("password");
+            var newPassword = document.getElementById("signUp_password");
+            var checkNewPassword = document.getElementById("signUp_checkPassword");
+            password.type = "password";
+            newPassword.type = "password";
+            checkNewPassword.type = "password";
         }
 
-        function submitForm() {
-            var userId = $('#userId').val();
+        function submitLoginForm() {
+            var username = $('#username').val();
             var password = $('#password').val();
 
             $.ajax({
                 method: 'GET',
                 url: '@isValidUser',
-                data: { userId: userId, password: password },
+                data: { username: username, password: password },
                 cache: false,
                 success: function (data) {
                     var result = data.result;
@@ -67,8 +121,67 @@
                         return false;
                     }
                 }
-
             });
+        }
+
+        function submitSignUpForm() {
+            var firstName = $('#signUp_firstName').val();
+            var lastName = $('#signUp_lastName').val();
+            var username = $('#signUp_username').val();
+            var password = $('#signUp_password').val();
+            var checkPassword = $('#signUp_checkPassword').val();
+            var isDev = $("input[name='radio-item']:checked").val();
+            var isValid = false;
+
+            if (!firstName || !lastName || !username || !password) {
+                alert("There should be no empty input!");
+                isValid = false;
+            }
+            else {
+                isValid = true;
+            }
+
+            if (password != checkPassword) {
+                alert("The password is not same");
+            }
+            else {
+                isValid = true;
+            }
+
+            $.ajax({
+                method: 'POST',
+                url: '@isValidUsername',
+                data: { firstName: firstName, lastName: lastName, username: username, password: password, isDev: isDev},
+                cache: false,
+                success: function (data) {
+                    var result = data.result;
+                    if (result) {
+                        $('#loginForm').submit();
+                    }
+                    else {
+                        alert('Invalid ID or password');
+                        return false;
+                    }
+                }
+            })
+
+            if (isValid) {
+                $('#loginView').show();
+                $('#signUpView').hide();
+
+                $('#signUp_firstName').val('');
+                $('#signUp_lastName').val('');
+                $('#signUp_username').val('');
+                $('#signUp_password').val('');
+                $('#signUp_checkPassword').val('');
+                
+                $.ajax({
+                method: 'POST',
+                url: '@signUp',
+                data: { firstName: firstName, lastName: lastName, username: username, password: password, isDev: isDev},
+                cache: false
+                });
+            }
         }
     </script>
 </body>

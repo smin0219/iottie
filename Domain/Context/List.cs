@@ -12,12 +12,14 @@ namespace Domain.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class List
     {
-        public string username { get; set; }
-        public string password { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public Nullable<int> isDev { get; set; }
+        public int idnum { get; set; }
+        public string title { get; set; }
+        public string status { get; set; }
+        public string createdBy { get; set; }
+        public string assignee { get; set; }
+        public Nullable<System.DateTime> deadline { get; set; }
+        public Nullable<int> priority { get; set; }
     }
 }

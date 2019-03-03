@@ -25,6 +25,7 @@ namespace Domain.Context
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<List> List { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }
