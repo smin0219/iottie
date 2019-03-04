@@ -19,11 +19,11 @@
             <PropertyRef Name="idnum" />
           </Key>
           <Property Name="idnum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="title" Type="varchar" MaxLength="50" />
-          <Property Name="status" Type="varchar" MaxLength="50" />
-          <Property Name="createdBy" Type="varchar" MaxLength="50" />
-          <Property Name="assignee" Type="varchar" MaxLength="50" />
-          <Property Name="deadline" Type="datetime" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createdBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="assignee" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="deadline" Type="datetime" Nullable="false" />
           <Property Name="priority" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
@@ -34,7 +34,7 @@
           <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="isDev" Type="int" />
+          <Property Name="isDev" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="iOttieModelStoreContainer">
           <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
@@ -64,11 +64,11 @@
             <PropertyRef Name="idnum" />
           </Key>
           <Property Name="idnum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="assignee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="deadline" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createdBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="assignee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -79,7 +79,7 @@
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="isDev" Type="Int32" />
+          <Property Name="isDev" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>

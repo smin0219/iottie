@@ -11,5 +11,6 @@ namespace Domain.Abstract
     {
         List<DashboardEntity> getDashboardList();
         DashboardEntity getDetailInfo(int idnum);
+        void updateDetailInfo(int idnum, string title, string assignee, string status, DateTime deadline, string priority);
     }
 }

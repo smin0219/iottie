@@ -62,6 +62,17 @@
             alert('Title field cannot be empty!');
             return false;
         }
+
+        if (!assignee) {
+            alert('Assignee field cannot be empty!');
+            return false;
+        }
+
+        if (!deadline) {
+            alert('Please choose date for the deadline');
+            return false;
+        }
+
         else {
             $('#createNewProjectForm').append('<input type="hidden" name=title value= ' + title + '>');
             $('#createNewProjectForm').append('<input type="hidden" name=assignee value= ' + assignee + '>');
@@ -70,11 +81,11 @@
 
             $('#createNewProjectForm').submit();
         }
-        }
+    }
 
-        function isBackBtnClicked() {
-            window.location = document.getElementById('backBtn').href
-        }
+    function isBackBtnClicked() {
+        window.location = document.getElementById('backBtn').href
+    }
 
     </script>
     </body>

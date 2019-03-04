@@ -11,11 +11,12 @@ namespace Domain.Abstract
         // To create and insert user into DB
         void createUser(string firstName, string lastName, string username, string password, int isDev);
         // To create and insert new project into DB
-        void createNewProject(string title, string assignee, string createdBy, DateTime? deadline, string status, string priority);
+        void createNewProject(string title, string assignee, string createdBy, DateTime deadline, string status, string priority);
         // To check whether the user's username and password is correct or not.
         bool isValidUser(string username, string password);
         // To check if the username is already exist in DB.
         bool isValidUsername(string username);
-
+        // To check if the username is developer or not.
+        bool isDev(string username);
     }
 }

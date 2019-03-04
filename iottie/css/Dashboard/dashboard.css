@@ -11,10 +11,17 @@
     margin-top: 20px;
     margin-right: 5%;
     background-color: #8DC63F;
+    border: 2px solid #8DC63F;
     font-family: arial, sans-serif;
     font-size: 15px;
     font-weight: bold;
     float: right;
+    border-radius: 4px;
+}
+
+#newBtn:hover {
+    color: #8DC63F;
+    background-color: #333;
 }
 
 .detailBtn{

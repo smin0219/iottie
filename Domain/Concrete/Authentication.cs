@@ -12,6 +12,7 @@ namespace Domain.Concrete
     //Brief explanation for each function exist in the interface.
     public class Authentication : IAuthentication
     {
+
         public bool isValidUser(string username, string password)
         {
             bool result = false;
@@ -39,6 +40,27 @@ namespace Domain.Concrete
                 return result;
             }
         }
+        public bool isDev(string username)
+        {
+            int? isDev = 0;
+            bool result = false;
+
+            using (DBContext context = new DBContext())
+            {
+                isDev = (from user in context.Users
+                          where user.username.Equals(username)
+                          select user.isDev).Single();
+            }
+
+            if(isDev == 1)
+            {
+                result = true;
+            }
+            else{
+                result = false;
+            }
+            return result;
+        }
         public void createUser(string firstName, string lastName, string username, string password, int isDev)
         {
             Users user = new Users
@@ -62,7 +84,7 @@ namespace Domain.Concrete
                 Console.WriteLine(e);
             }
         }
-        public void createNewProject(string title, string assignee, string createdBy, DateTime? deadline, string status, string priority)
+        public void createNewProject(string title, string assignee, string createdBy, DateTime deadline, string status, string priority)
         {
             List list = new List
             {

@@ -68,5 +68,30 @@ namespace Domain.Concrete
             }
             return info;
         }
+
+        public void updateDetailInfo(int idnum, string title, string assignee, string status, DateTime deadline, string priority)
+        {
+            using (DBContext context = new DBContext())
+            {
+                try
+                {
+                    var result = context.List.SingleOrDefault(a => a.idnum == idnum);
+
+                    if (result != null)
+                    {
+                        result.title = title;
+                        result.assignee = assignee;
+                        result.deadline = deadline;
+                        result.status = status;
+                        result.priority = priority;
+                        context.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Domain.Context
         public string status { get; set; }
         public string createdBy { get; set; }
         public string assignee { get; set; }
-        public Nullable<System.DateTime> deadline { get; set; }
+        public System.DateTime deadline { get; set; }
         public string priority { get; set; }
     }
 }

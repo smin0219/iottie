@@ -15,7 +15,9 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("AddNewProject", "Home", FormMethod.Post, new { id = "addNewProjectForm" })) { }
+    @using (Html.BeginForm("AddNewProject", "Home", FormMethod.Post, new { id = "addNewProjectForm" }))
+    {
+    }
     @using (Html.BeginForm("Detail", "Home", FormMethod.Post, new { id = "detailForm" }))
     {
 
@@ -40,17 +42,16 @@
                 <td>@row.status</td>
                 <td>@row.createdBy</td>
                 <td>@row.assignee</td>
-                <td>@row.deadline</td>
+                <td>@row.deadline.ToString("yyyy-MM-dd")</td>
                 <td>@row.priority</td>
                 <td>
                     <button type="button" id="detailBtn" onclick="isDetailBtnClicked(@row.idnum)">SEE DETAIL</button>
-                    <input type="hidden" name="username" value=@Model.username>
                 </td>
 
             </tr>
 
             count++;
-        }
+                    }
     </table>
     }
 

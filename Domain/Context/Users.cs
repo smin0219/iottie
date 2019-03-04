@@ -18,6 +18,6 @@ namespace Domain.Context
         public string password { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
-        public Nullable<int> isDev { get; set; }
+        public int isDev { get; set; }
     }
 }

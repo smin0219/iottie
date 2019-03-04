@@ -51,18 +51,37 @@ tr:nth-child(even) {
     font-size: 16px;
     font-weight: bold;
     color: white;
-    background-color: #333;
+    background-color: #8DC63F;
     border: 2px solid #8DC63F;
     border-radius: 4px;
 }
 
 .submitBtn:hover {
-    color: #333;
-    background-color: #8DC63F;
+    color: #8DC63F;
+    background-color: #333;
 }
 
 .innerView {
     width: 700px;
     height: 500px;
     text-align: center
+}
+
+#editBtn {
+    width: 170px;
+    height: 40px;
+    margin-top: 20px;
+    margin-right: 5%;
+    background-color: #8DC63F;
+    border: 2px solid #8DC63F;
+    font-family: arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    float: right;
+    border-radius: 4px;
+}
+
+#editBtn:hover {
+    color: #8DC63F;
+    background-color: #333;
 }

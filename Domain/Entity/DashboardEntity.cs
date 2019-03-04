@@ -16,7 +16,7 @@ namespace Domain.Entity
 
         public string assignee { get; set; }
 
-        public DateTime? deadline { get; set; }
+        public DateTime deadline { get; set; }
 
         public string status { get; set; }
 

@@ -1,0 +1,84 @@
+﻿@model Domain.Entity.DashboardEntity
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div style="color:black; text-align: center; font-weight: bold; font-family: sans-serif; font-size: 30px; margin-top:30px;"> Edit </div>
+    @using (Html.BeginForm("EditProject", "Home", FormMethod.Post, new { id = "editProjectForm" }))
+    {
+        <div class="userInputBorder" style="margin-top: 50px;">
+            <div class="innerView">
+                <div style="color: white; font-size: 20px; font-weight: bold; padding-top: 30px;">Title </div><input type="text" class="inputBox" id="title" style="border: 1px solid black;" ; placeholder="Enter title of project" value="@Model.title"><br />
+                <div style="color: white; font-size: 20px; font-weight: bold">Assignee </div><input type="text" class="inputBox" id="assignee" style="border: 1px solid black;" placeholder="Enter assignee of project" value="@Model.assignee"><br />
+                <div style="color: white; font-size: 20px; font-weight: bold">Status </div>
+                <select name="status" style="width: 100px; height: 30px; font-size:15px;" value="@Model.status">
+                    <option value="Pending">Pending</option>
+                    <option value="Building">Building</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Completed">Completed</option>
+                </select>
+                <div style="color: white; font-size: 20px; font-weight: bold">Priority </div>
+                <select name="priority" style="width: 100px; height: 30px; font-size:15px;" value="@Model.priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select><br />
+                <div style="color: white; font-size: 20px; font-weight: bold">Deadline </div>
+                <input type="date" id="deadline" name="deadline" style="width: 140px; height: 30px; font-size:15px;" ; value="@Model.deadline"><br />
+                @*<input type="text" class="inputBox" id="priority" style="border: 1px solid black;" placeholder="Enter priority of project (1 - 5)">*@
+                <button type="button" class="submitBtn" id="submitBtn" onclick="isSubmitBtnClicked()">SUBMIT</button><br />
+                <button type="button" class="submitBtn" style="margin-top: 15px;" onclick="isBackBtnClicked()">BACK</button><br />
+                <a id="backBtn" href="/Home/Dashboard"></a>
+            </div>
+        </div>
+    }
+
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        function isSubmitBtnClicked() {
+            var title = $('#title').val();
+            var assignee = $('#assignee').val();
+            var deadline = $('#deadline').val();
+
+            if (!title) {
+                alert('Title field cannot be empty!');
+                return false;
+            }
+
+            if (!assignee) {
+                alert('Assignee field cannot be empty!');
+                return false;
+            }
+
+            if (!deadline) {
+                alert('Please choose date for the deadline');
+                return false;
+            }
+
+            else {
+                $('#editProjectForm').append('<input type="hidden" name=idnum value= ' + @Model.idnum + '>');
+                $('#editProjectForm').append('<input type="hidden" name=title value= ' + title + '>');
+                $('#editProjectForm').append('<input type="hidden" name=assignee value= ' + assignee + '>');
+                $('#editProjectForm').append('<input type="hidden" name=deadline value= ' + deadline + '>');
+                $('#editProjectForm').submit();
+            }
+        }
+        
+        function isBackBtnClicked() {
+            window.location = document.getElementById('backBtn').href
+        }
+
+    </script>
+</body>
+</html>
