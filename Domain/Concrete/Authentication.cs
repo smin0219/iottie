@@ -9,7 +9,10 @@ using Domain.Context;
 
 namespace Domain.Concrete
 {
-    //Brief explanation for each function exist in the interface.
+    /**
+     * Brief explanation for each function in the IAuthentication.cs
+     * */
+    
     public class Authentication : IAuthentication
     {
 
@@ -27,6 +30,7 @@ namespace Domain.Concrete
 
             return result;
         }
+
         public bool isValidUsername(string username)
         {
             bool result = false;
@@ -40,27 +44,34 @@ namespace Domain.Concrete
                 return result;
             }
         }
+
         public bool isDev(string username)
         {
             int? isDev = 0;
-            bool result = false;
 
             using (DBContext context = new DBContext())
             {
-                isDev = (from user in context.Users
-                          where user.username.Equals(username)
-                          select user.isDev).Single();
+                try
+                {
+                    isDev = (from user in context.Users
+                             where user.username.Equals(username)
+                             select user.isDev).Single();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                } 
             }
 
             if(isDev == 1)
             {
-                result = true;
+                return true;
             }
             else{
-                result = false;
+                return false;
             }
-            return result;
         }
+
         public void createUser(string firstName, string lastName, string username, string password, int isDev)
         {
             Users user = new Users
@@ -84,6 +95,7 @@ namespace Domain.Concrete
                 Console.WriteLine(e);
             }
         }
+
         public void createNewProject(string title, string assignee, string createdBy, DateTime deadline, string status, string priority)
         {
             List list = new List

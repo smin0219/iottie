@@ -9,6 +9,10 @@ using Domain.Context;
 
 namespace Domain.Concrete
 {
+    /**
+     * Brief explanation for each function in the IDetail.cs
+     * */
+
     public class Detail : IDetail
     {
         public List<ChatEntity> getChatList(int list_idnum)

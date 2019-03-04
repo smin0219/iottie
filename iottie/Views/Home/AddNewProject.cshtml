@@ -20,7 +20,6 @@
         <div class="userInputBorder" style="margin-top: 50px;">
             <div class="innerView">
                 <div style="color: white; font-size: 20px; font-weight: bold; padding-top: 30px;">Title </div><input type="text" class="inputBox" id="title" style="border: 1px solid black;" ; placeholder="Enter title of project"><br />
-                @*<div style="color: white; font-size: 20px; font-weight: bold">Status </div><input type="text" class="inputBox" id="status" style="border: 1px solid black;" placeholder="Enter status of project"><br />*@
                 <div style="color: white; font-size: 20px; font-weight: bold">Assignee </div><input type="text" class="inputBox" id="assignee" style="border: 1px solid black;" placeholder="Enter assignee of project"><br />
                 <div style="color: white; font-size: 20px; font-weight: bold">Status </div>
                 <select name="status" style="width: 100px; height: 30px; font-size:15px;">
@@ -37,7 +36,6 @@
                 </select><br />
                 <div style="color: white; font-size: 20px; font-weight: bold">Deadline </div>
                 <input type="date" id="deadline" name="deadline" style="width: 140px; height: 30px; font-size:15px;"><br />
-                @*<input type="text" class="inputBox" id="priority" style="border: 1px solid black;" placeholder="Enter priority of project (1 - 5)">*@
                 <button type="button" class="submitBtn" id="submitBtn" onclick="isSubmitBtnClicked()">SUBMIT</button><br />
                 <button type="button" class="submitBtn" style="margin-top: 15px;" onclick="isBackBtnClicked()">BACK</button><br />
                 <a id="backBtn" href="/Home/Dashboard"></a>
@@ -47,45 +45,55 @@
 
 
     <script>
-    $(document).ready(function () {
+        function isSubmitBtnClicked() {
 
-    });
+            var title = $('#title').val();
+            var assignee = $('#assignee').val();
+            var deadline = $('#deadline').val();
+            var username = '@username';
 
-    function isSubmitBtnClicked() {
+            if (!title) {
+                alert('Title field cannot be empty!');
+                return false;
+            }
 
-        var title = $('#title').val();
-        var assignee = $('#assignee').val();
-        var deadline = $('#deadline').val();
-        var username = '@username';
+            if (!assignee) {
+                alert('Assignee field cannot be empty!');
+                return false;
+            }
 
-        if (!title) {
-            alert('Title field cannot be empty!');
-            return false;
+            if (!deadline) {
+                alert('Please choose date for the deadline');
+                return false;
+            }
+
+            else {
+                $('#createNewProjectForm').append('<input type="hidden" name=title value= ' + title + '>');
+                $('#createNewProjectForm').append('<input type="hidden" name=assignee value= ' + assignee + '>');
+                $('#createNewProjectForm').append('<input type="hidden" name=deadline value= ' + deadline + '>');
+                $('#createNewProjectForm').append('<input type="hidden" name=createdBy value= ' + username + '>');
+
+                $('#createNewProjectForm').submit();
+            }
         }
 
-        if (!assignee) {
-            alert('Assignee field cannot be empty!');
-            return false;
+        function isBackBtnClicked() {
+            window.location = document.getElementById('backBtn').href
         }
 
-        if (!deadline) {
-            alert('Please choose date for the deadline');
-            return false;
-        }
+        $(function () {
+            $('#title').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
 
-        else {
-            $('#createNewProjectForm').append('<input type="hidden" name=title value= ' + title + '>');
-            $('#createNewProjectForm').append('<input type="hidden" name=assignee value= ' + assignee + '>');
-            $('#createNewProjectForm').append('<input type="hidden" name=deadline value= ' + deadline + '>');
-            $('#createNewProjectForm').append('<input type="hidden" name=createdBy value= ' + username + '>');
-
-            $('#createNewProjectForm').submit();
-        }
-    }
-
-    function isBackBtnClicked() {
-        window.location = document.getElementById('backBtn').href
-    }
+        $(function () {
+            $('#assignee').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
 
     </script>
     </body>

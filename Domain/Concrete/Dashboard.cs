@@ -9,6 +9,11 @@ using Domain.Context;
 
 namespace Domain.Concrete
 {
+
+    /**
+     * Brief explanation for each function in the IDashboard.cs
+     * */
+
     public class Dashboard : IDashboard
     {
         public List<DashboardEntity> getDashboardList()
@@ -93,5 +98,23 @@ namespace Domain.Concrete
                 }
             }
         }
+
+        public void removeList(int idnum)
+        {
+            using (DBContext context = new DBContext())
+            {
+                try
+                {
+                    var result = context.List.SingleOrDefault(a => a.idnum == idnum);
+                    context.List.Remove(result);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
+
     }
 }

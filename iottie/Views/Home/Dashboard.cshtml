@@ -55,14 +55,8 @@
     </table>
     }
 
-
-    @*@using (Html.BeginForm("Detail", "Home", FormMethod.Post, new { id = "detailForm" }))
-        {
-            <input type="hidden" name="idnum" value=@Model.idnum>
-        }*@
     <script>
         $(document).ready(function () {
-            // window.location.reload(true);
             $('#newBtn').click(function () {
                 $('#addNewProjectForm').submit();
             });

@@ -1,13 +1,40 @@
-﻿<h2>"Contact".</h2>
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<!DOCTYPE html>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/css/Login/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Layout/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div style="text-align:center; font-size: 30px; font-weight:bold; margin: 50px;">Contact</div>
+    <div style="text-align:center; font-size: 20px;">SUNG JAE MIN</div><br />
+    <address style="text-align:center;">
+
+        <abbr title="Phone" style="text-align:center;">Cell:</abbr> 201-663-5999<br />
+        <abbr title="Email" style="text-align:center;">Email:</abbr> smin0219@gmail.com<br /><br />
+    </address>
+
+    <address style="text-align:center;">
+        <strong>Business Development:</strong>   <a href="mailto:sales@iottie.com">sales@iottie.com</a><br />
+        <strong>Customer Service:</strong> <a href="mailto:cs@iottie.com">cs@iottie.com</a><br />
+        <strong>Press & Media:</strong>   <a href="mailto:iottie@bigfishpr.com">iottie@bigfishpr.com</a><br />
+    </address>
+    <script>
+        $(function () {
+            $('a').each(function () {
+                if ($(this).prop('href') == window.location.href) {
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

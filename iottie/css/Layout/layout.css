@@ -29,6 +29,10 @@ li a {
     text-decoration: none;
 }
 
+li a:hover {
+    background-color: #8DC63F;
+}
+
 .navbar {
     background-color: #333;
     overflow: hidden;
@@ -52,10 +56,6 @@ li a {
     padding-right: 0;
     width: 120px;
     height: 50px;
-}
-
-li a:hover {
-    background-color: #8DC63F;
 }
 
 .navbar ul li .active {

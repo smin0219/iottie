@@ -135,6 +135,7 @@
 
             if (password != checkPassword) {
                 alert("The password is not same");
+                isValid = false;
             }
             else {
                 isValid = true;
@@ -173,9 +174,42 @@
                     return;
                 }
             });
-
-            
         }
+
+        $(function () {
+            $('#signUp_firstName').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
+
+        $(function () {
+            $('#signUp_lastName').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
+
+        $(function () {
+            $('#signUp_username').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
+
+        $(function () {
+            $('#signUp_password').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
+
+        $(function () {
+            $('#signUp_checkPassword').on('keypress', function (e) {
+                if (e.which == 32)
+                    return false;
+            });
+        });
     </script>
 </body>
 </html>
