@@ -39,5 +39,34 @@ namespace Domain.Concrete
                 return list;
             }
         }
+
+        public DashboardEntity getDetailInfo(int idnum)
+        {
+            DashboardEntity info = new DashboardEntity();
+
+            using (DBContext context = new DBContext())
+            {
+                try
+                {
+                    info = (from a in context.List
+                            where a.idnum == idnum
+                            select new DashboardEntity
+                            {
+                                idnum = a.idnum,
+                                title = a.title,
+                                createdBy = a.createdBy,
+                                assignee = a.assignee,
+                                deadline = a.deadline,
+                                status = a.status,
+                                priority = a.priority
+                            }).SingleOrDefault();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+            return info;
+        }
     }
 }

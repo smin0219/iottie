@@ -8,6 +8,7 @@ namespace iottie.Models
 {
     public class DashboardModel
     {
+        public string username { get; set; }
         public List<DashboardEntity> dashboardList { get; set; }
     }
 }

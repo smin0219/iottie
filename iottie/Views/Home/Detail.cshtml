@@ -1,0 +1,77 @@
+﻿@model Domain.Entity.DashboardEntity
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    string addChatListURL = Url.Action("addChatList", "Home");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div style="color:black; text-align: center; font-weight: bold; font-family: sans-serif; font-size: 30px; margin-top:30px;"> Detail</div>
+    <table>
+        <tr>
+            <th>TITLE</th>
+            <th>STATUS</th>
+            <th>CREATED BY</th>
+            <th>ASSIGNEE</th>
+            <th>DEADLINE</th>
+            <th>PRIORITY</th>
+        </tr>
+        <tr>
+            <td>@Model.title</td>
+            <td>@Model.status</td>
+            <td>@Model.createdBy</td>
+            <td>@Model.assignee</td>
+            <td>@Model.deadline</td>
+            <td>@Model.priority</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th style="text-align:center;" colspan="2">CONVERSATION</th>
+        </tr>
+        @foreach (var row in Model.chatList)
+        {
+            <tr>
+                <td style="width: 120px;">@row.writtenBy : </td>
+                <td>@row.body</td>
+            </tr>
+        }
+    </table>
+    <input type="text" class="inputBox" id="chatBox" placeholder="Type here" style="margin-left: 5%; margin-top: 20px; width: 89%; border-color: black"><br />
+
+    <script>
+        $(document).ready(function () {
+            $('#chatBox').keypress(function (e) {
+                var keycode = e.keyCode
+                if (keycode == 13) {
+                    addChatList();
+                }
+            });
+        });
+
+        function addChatList() {
+
+            var list_idnum = '@Model.idnum'
+            var writtenBy = '@Model.createdBy';
+            var body = $('#chatBox').val();
+
+            $.ajax({
+                method: 'GET',
+                url: '@addChatListURL',
+                data: { list_idnum: list_idnum, writtenBy: writtenBy, body: body },
+                cache: false,
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

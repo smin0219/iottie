@@ -7,9 +7,9 @@ using Domain.Entity;
 
 namespace Domain.Abstract
 {
-    public interface IDashboard
+    public interface IDetail
     {
-        List<DashboardEntity> getDashboardList();
-        DashboardEntity getDetailInfo(int idnum);
+        List<ChatEntity> getChatList(int list_idnum);
+        bool setChatList(int list_idnum, string writtenBy, string body);
     }
 }

@@ -12,14 +12,11 @@ namespace Domain.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class List
+    public partial class Chat
     {
         public int idnum { get; set; }
-        public string title { get; set; }
-        public string status { get; set; }
-        public string createdBy { get; set; }
-        public string assignee { get; set; }
-        public Nullable<System.DateTime> deadline { get; set; }
-        public string priority { get; set; }
+        public Nullable<int> list_idnum { get; set; }
+        public string body { get; set; }
+        public string writtenBy { get; set; }
     }
 }

@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="iOttieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="idnum" />
+          </Key>
+          <Property Name="idnum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="list_idnum" Type="int" />
+          <Property Name="body" Type="varchar(max)" />
+          <Property Name="writtenBy" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="List">
           <Key>
             <PropertyRef Name="idnum" />
@@ -15,7 +24,7 @@
           <Property Name="createdBy" Type="varchar" MaxLength="50" />
           <Property Name="assignee" Type="varchar" MaxLength="50" />
           <Property Name="deadline" Type="datetime" />
-          <Property Name="priority" Type="int" />
+          <Property Name="priority" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -28,6 +37,7 @@
           <Property Name="isDev" Type="int" />
         </EntityType>
         <EntityContainer Name="iOttieModelStoreContainer">
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -36,9 +46,19 @@
     <edmx:ConceptualModels>
       <Schema Namespace="iOttieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chat" EntityType="iOttieModel.Chat" />
           <EntitySet Name="List" EntityType="iOttieModel.List" />
           <EntitySet Name="Users" EntityType="iOttieModel.Users" />
         </EntityContainer>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="idnum" />
+          </Key>
+          <Property Name="idnum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="list_idnum" Type="Int32" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="writtenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="List">
           <Key>
             <PropertyRef Name="idnum" />
@@ -49,7 +69,7 @@
           <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="assignee" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="deadline" Type="DateTime" Precision="3" />
-          <Property Name="priority" Type="Int32" />
+          <Property Name="priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -67,6 +87,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="iOttieModelStoreContainer" CdmEntityContainer="DBContext">
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="iOttieModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="writtenBy" ColumnName="writtenBy" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="list_idnum" ColumnName="list_idnum" />
+                <ScalarProperty Name="idnum" ColumnName="idnum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="List">
             <EntityTypeMapping TypeName="iOttieModel.List">
               <MappingFragment StoreEntitySet="List">

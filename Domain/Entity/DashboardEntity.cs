@@ -12,14 +12,16 @@ namespace Domain.Entity
 
         public string title { get; set; }
 
-        public string status { get; set; }
-
         public string createdBy { get; set; }
 
         public string assignee { get; set; }
 
         public DateTime? deadline { get; set; }
 
-        public int? priority { get; set; }
+        public string status { get; set; }
+
+        public string priority { get; set; }
+
+        public List<ChatEntity> chatList { get; set; }
     }
 }

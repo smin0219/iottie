@@ -1,5 +1,4 @@
-﻿@model iottie.Models.DashboardModel
-@{
+﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
     int count = 1;
 }
@@ -16,20 +15,22 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("AddNewProject", "Home", FormMethod.Post, new { id = "addNewProjectForm" }))
+    @using (Html.BeginForm("AddNewProject", "Home", FormMethod.Post, new { id = "addNewProjectForm" })) { }
+    @using (Html.BeginForm("Detail", "Home", FormMethod.Post, new { id = "detailForm" }))
     {
-        <button type="button" id="newBtn">ADD NEW PROJECT</button><br />
-        <table>
-            <tr>
-                <th>NO.</th>
-                <th>TITLE</th>
-                <th>STATUS</th>
-                <th>CREATED BY</th>
-                <th>ASSIGNEE</th>
-                <th>DEADLINE</th>
-                <th>PRIORITY</th>
-                <th>DETAIL</th>
-            </tr>
+
+    <button type="button" id="newBtn">ADD NEW PROJECT</button><br />
+    <table>
+        <tr>
+            <th>NO.</th>
+            <th>TITLE</th>
+            <th>STATUS</th>
+            <th>CREATED BY</th>
+            <th>ASSIGNEE</th>
+            <th>DEADLINE</th>
+            <th>PRIORITY</th>
+            <th>DETAIL</th>
+        </tr>
 
         @foreach (var row in Model.dashboardList)
         {
@@ -42,26 +43,34 @@
                 <td>@row.deadline</td>
                 <td>@row.priority</td>
                 <td>
-                    <button type="button" id="detailBtn" onclick="isDetailBtnClicked()">SEE DETAIL</button>
-                    <input type="hidden" name="idnum" value=@row.idnum>
+                    <button type="button" id="detailBtn" onclick="isDetailBtnClicked(@row.idnum)">SEE DETAIL</button>
+                    <input type="hidden" name="username" value=@Model.username>
                 </td>
 
             </tr>
 
             count++;
         }
-        </table>
-
+    </table>
     }
+
+
+    @*@using (Html.BeginForm("Detail", "Home", FormMethod.Post, new { id = "detailForm" }))
+        {
+            <input type="hidden" name="idnum" value=@Model.idnum>
+        }*@
     <script>
         $(document).ready(function () {
+            // window.location.reload(true);
             $('#newBtn').click(function () {
                 $('#addNewProjectForm').submit();
             });
         });
 
-        function isDetailBtnClicked() {
-            $('#addNewProjectForm').submit();
+        function isDetailBtnClicked(idnum) {
+            $('#detailForm').append('<input type="hidden" name="list_idnum" value=' + idnum + '>')
+            $('#detailForm').submit();
+            
         }
     </script>
 </body>

@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="navbar">
-        <a>@*<img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" />*@</a>
+        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
         <ul>
             <li><a href="/Login/Index">Home</a></li>
             <li><a href="/Login/Contact">Contact</a></li>
@@ -28,14 +28,14 @@
     <div class="userInputBorder">
         @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post, new { id = "loginForm" }))
         {
-            <div id="loginView">
-                <a>@*<img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" />*@</a>
+        <div id="loginView">
+            <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
 
-                <input type="text" class="inputBox" id="username" placeholder="Enter your username"><br />
-                <input type="text" class="inputBox" id="password" placeholder="Enter you password" onclick="setPassword()"><br />
-                <button type="button" class="loginBtn" id="loginBtn">LOGIN</button><br />
-                <button type="button" class="loginBtn" id="signUpBtn"> SIGN UP </button>
-            </div>
+            <input type="text" class="inputBox" id="username" placeholder="Enter your username"><br />
+            <input type="password" class="inputBox" id="password" placeholder="Enter you password"><br />
+            <button type="button" class="submitBtn" id="loginBtn">LOGIN</button><br />
+            <button type="button" class="submitBtn" id="signUpBtn"> SIGN UP </button>
+        </div>
         }
         @using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { id = "signUpForm" }))
         {
@@ -44,14 +44,14 @@
                 <input type="text" class="inputBox" id="signUp_firstName" placeholder="Enter your first name"><br />
                 <input type="text" class="inputBox" id="signUp_lastName" placeholder="Enter your last name"><br />
                 <input type="text" class="inputBox" id="signUp_username" placeholder="Enter your username"><br />
-                <input type="text" class="inputBox" id="signUp_password" placeholder="Enter your password" onclick="setPassword()"><br />
-                <input type="text" class="inputBox" id="signUp_checkPassword" placeholder="Re-enter your password" onclick="setPassword()"><br />
+                <input type="password" class="inputBox" id="signUp_password" placeholder="Enter your password"><br />
+                <input type="password" class="inputBox" id="signUp_checkPassword" placeholder="Re-enter your password"><br />
                 <div class="radio-item">
                     <input type="radio" name="radio-item" value='1'> Developer <br />
                     <input type="radio" name="radio-item" value='0' checked> Non-Developer<br />
                 </div>
-                <button type="button" class="loginBtn" id="submitBtn">SUBMIT</button><br />
-                <button type="button" class="loginBtn" id="backBtn">BACK</button><br />
+                <button type="button" class="submitBtn" id="submitBtn">SUBMIT</button><br />
+                <button type="button" class="submitBtn" id="backBtn">BACK</button><br />
             </div>
         }
     </div>
@@ -91,17 +91,7 @@
                     submitLoginForm();
                 }
             });
-
         });
-
-        function setPassword() {
-            var password = document.getElementById("password");
-            var newPassword = document.getElementById("signUp_password");
-            var checkNewPassword = document.getElementById("signUp_checkPassword");
-            password.type = "password";
-            newPassword.type = "password";
-            checkNewPassword.type = "password";
-        }
 
         function submitLoginForm() {
             var username = $('#username').val();
@@ -115,6 +105,7 @@
                 success: function (data) {
                     var result = data.result;
                     if (result) {
+                        $('#loginForm').append('<input type="hidden" value=' + username + ' name="username">');
                         $('#loginForm').submit();
                     }
                     else {
@@ -155,32 +146,35 @@
                 data: { username: username },
                 cache: false,
                 success: function (data) {
-                    alert('Hello');
-                    
+                    if (data.result) {
+                        alert('The user name is already exist. Enter another username.');
+                        isValid = false;
+                    }
+                    if (isValid) {
+                        $('#loginView').show();
+                        $('#signUpView').hide();
+
+                        $('#signUp_firstName').val('');
+                        $('#signUp_lastName').val('');
+                        $('#signUp_username').val('');
+                        $('#signUp_password').val('');
+                        $('#signUp_checkPassword').val('');
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '@signUp',
+                            data: { firstName: firstName, lastName: lastName, username: username, password: password, isDev: isDev },
+                            cache: false
+                        });
+                    }
                 },
                 error: function (data) {
                     alert('Exception occured');
                     return;
                 }
-            });ßß
+            });
 
-            if (isValid) {
-                $('#loginView').show();
-                $('#signUpView').hide();
-
-                $('#signUp_firstName').val('');
-                $('#signUp_lastName').val('');
-                $('#signUp_username').val('');
-                $('#signUp_password').val('');
-                $('#signUp_checkPassword').val('');
-                
-                $.ajax({
-                method: 'POST',
-                url: '@signUp',
-                data: { firstName: firstName, lastName: lastName, username: username, password: password, isDev: isDev},
-                cache: false
-                });
-            }
+            
         }
     </script>
 </body>

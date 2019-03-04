@@ -9,6 +9,7 @@ using Domain.Context;
 
 namespace Domain.Concrete
 {
+    //Brief explanation for each function exist in the interface.
     public class Authentication : IAuthentication
     {
         public bool isValidUser(string username, string password)
@@ -25,7 +26,6 @@ namespace Domain.Concrete
 
             return result;
         }
-
         public bool isValidUsername(string username)
         {
             bool result = false;
@@ -39,7 +39,6 @@ namespace Domain.Concrete
                 return result;
             }
         }
-
         public void createUser(string firstName, string lastName, string username, string password, int isDev)
         {
             Users user = new Users
@@ -57,6 +56,29 @@ namespace Domain.Concrete
                 context.Users.Add(user);
                 context.SaveChanges();
 
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        public void createNewProject(string title, string assignee, string createdBy, DateTime? deadline, string status, string priority)
+        {
+            List list = new List
+            {
+                title = title,
+                status = status,
+                assignee = assignee,
+                deadline = deadline,
+                createdBy = createdBy,
+                priority = priority
+            };
+
+            try
+            {
+                DBContext context = new DBContext();
+                context.List.Add(list);
+                context.SaveChanges();
             }
             catch(Exception e)
             {
