@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    string addNewProject = Url.Action("AddNewProject", "Home");
 }
 
 <!DOCTYPE html>
@@ -7,11 +8,42 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>Create New Project</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div>
-        HELLO
-    </div>
+    <h1 style="color:black; text-align: center;"> Create New Project</h1>
+
+    <div style="font-size: 15px; font-weight: bold">Title: </div><input type="text" class="inputBox" id="title" style="border: 1px solid black;" placeholder="Enter title of project"><br />
+    <div style="font-size: 15px; font-weight: bold">Status: </div><input type="text" class="inputBox" id="status" style="border: 1px solid black;" placeholder="Enter status of project"><br />
+    <div style="font-size: 15px; font-weight: bold">Assignee: </div><input type="text" class="inputBox" id="assignee" style="border: 1px solid black;" placeholder="Enter assignee of project" onclick="setPassword()"><br />
+    <div style="font-size: 15px; font-weight: bold">Deadline: </div><input type="text" class="inputBox" id="deadline" style="border: 1px solid black;" placeholder="Enter deadline of project" onclick="setPassword()"><br />
+    <div style="font-size: 15px; font-weight: bold">Priority (1 - 5): </div><input type="text" class="inputBox" id="priority" style="border: 1px solid black;" placeholder="Enter priority of project (1 - 5)"><br />
+    <button type="button" class="submitBtn" id="submitBtn" onclick="isSubmitBtnClicked()">SUBMIT</button><br />
+
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        function isSubmitBtnClicked() {
+
+            var title = $('#title').val();
+            var status = $('#status').val();
+            var assignee = $('#assignee').val();
+            var deadline = $('#deadline').val();
+            var priority = $('#priority').val();
+
+            $.ajax({
+                method: 'POST',
+                url: '@addNewProject',
+                data: { title: title, status: status, assignee: assignee, deadline: deadline, priority: priority },
+                cache: false,
+                success: function (data) {
+                }
+            });    
+        }
+
+    </script>
 </body>
 </html>

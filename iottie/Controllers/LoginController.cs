@@ -24,16 +24,19 @@ namespace iottie.Controllers
             return View();
         } 
 
+        [HttpGet]
         public JsonResult isValidUser(string username, string password)
         {
             return Json(new { result = this.authenticationRepo.isValidUser(username, password) }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public JsonResult isValidUsername(string username)
         {
-            return Json(new { result = this.authenticationRepo.isValidUser(username) }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = this.authenticationRepo.isValidUsername(username) }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public void SignUp(string firstName, string lastName, string username, string password, int isDev)
         {
             authenticationRepo.createUser(firstName, lastName, username, password, isDev);

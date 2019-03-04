@@ -10,6 +10,6 @@ namespace Domain.Abstract
     {
         void createUser(string firstName, string lastName, string username, string password, int isDev);
         bool isValidUser(string username, string password);
-        bool isValidUser(string username);
+        bool isValidUsername(string username);
     }
 }

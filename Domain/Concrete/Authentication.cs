@@ -11,12 +11,6 @@ namespace Domain.Concrete
 {
     public class Authentication : IAuthentication
     {
-        public bool isValidUser(string username)
-        {
-            bool result = false;
-
-        }
-
         public bool isValidUser(string username, string password)
         {
             bool result = false;
@@ -30,6 +24,20 @@ namespace Domain.Concrete
             }
 
             return result;
+        }
+
+        public bool isValidUsername(string username)
+        {
+            bool result = false;
+
+            using (DBContext context = new DBContext())
+            {
+                result = (from user in context.Users
+                          where user.username.Equals(username)
+                          select user).Any();
+
+                return result;
+            }
         }
 
         public void createUser(string firstName, string lastName, string username, string password, int isDev)

@@ -167,6 +167,7 @@
     <Content Include="css\Dashboard\dashboard.css" />
     <Content Include="css\Layout\layout.css" />
     <Content Include="css\Login\login.css" />
+    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

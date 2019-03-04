@@ -14,11 +14,12 @@
     <title>Login</title>
     <link href="~/css/Login/login.css" rel="stylesheet" type="text/css" />
     <link href="~/css/Layout/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <div class="navbar">
-        <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+        <a>@*<img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" />*@</a>
         <ul>
             <li><a href="/Login/Index">Home</a></li>
             <li><a href="/Login/Contact">Contact</a></li>
@@ -28,7 +29,7 @@
         @using (Html.BeginForm("Dashboard", "Home", FormMethod.Post, new { id = "loginForm" }))
         {
             <div id="loginView">
-                <a><img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" /></a>
+                <a>@*<img src="https://iottie.com/img/common/iottie_logo.svg" alt="iottie logo" />*@</a>
 
                 <input type="text" class="inputBox" id="username" placeholder="Enter your username"><br />
                 <input type="text" class="inputBox" id="password" placeholder="Enter you password" onclick="setPassword()"><br />
@@ -149,21 +150,19 @@
             }
 
             $.ajax({
-                method: 'POST',
+                method: 'GET',
                 url: '@isValidUsername',
-                data: { firstName: firstName, lastName: lastName, username: username, password: password, isDev: isDev},
+                data: { username: username },
                 cache: false,
                 success: function (data) {
-                    var result = data.result;
-                    if (result) {
-                        $('#loginForm').submit();
-                    }
-                    else {
-                        alert('Invalid ID or password');
-                        return false;
-                    }
+                    alert('Hello');
+                    
+                },
+                error: function (data) {
+                    alert('Exception occured');
+                    return;
                 }
-            })
+            });ßß
 
             if (isValid) {
                 $('#loginView').show();
